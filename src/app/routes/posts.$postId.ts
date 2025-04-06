@@ -12,10 +12,10 @@ import { PostQuery } from '../post-query'
 export const Route = createFileRoute('/posts/$postId')({
 	component: () => Post,
 	errorComponent: () => PostError,
-	loader: ({ params: { postId } }) => {
+	loader: async ({ params: { postId } }) => {
 		const queryClient = inject(QueryClient)
 		const postQuery = inject(PostQuery)
-		return queryClient.ensureQueryData(postQuery.postQueryOptions(postId))
+		return await queryClient.ensureQueryData(postQuery.postQueryOptions(postId))
 	},
 })
 
@@ -44,15 +44,12 @@ export class PostError {
 @Component({
 	selector: 'Post',
 	template: `
-		@if (postQueryResult.isPending() || postQueryResult.isFetching()) {
-			<p>Loading post...</p>
-		} @else if (postQueryResult.isError()) {
-			<p>Failed to load post.</p>
-			<p>Error: {{ postQueryResult.error().message }}</p>
-		} @else {
-			<h4 class="text-xl font-bold underline">{{ postQueryResult.data()?.title }}</h4>
-			<div class="text-sm">{{ postQueryResult.data()?.body }}</div>
-		}
+		<!-- we don't use isPending() or isError() here because we will not run into those cases in the component -->
+		<!-- The loader ensures that the data is available. If there's pending, then the Route shows pendingComponent -->
+		<!-- If there's an error, then the Route shows errorComponent -->
+
+		<h4 class="text-xl font-bold underline">{{ postQueryResult.data()?.title }}</h4>
+		<div class="text-sm">{{ postQueryResult.data()?.body }}</div>
 	`,
 	host: { class: 'block space-y-2' },
 	changeDetection: ChangeDetectionStrategy.OnPush,

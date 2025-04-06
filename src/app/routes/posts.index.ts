@@ -7,9 +7,8 @@ export const Route = createFileRoute('/posts/')({
 
 @Component({
 	selector: 'PostsIndex',
-	template: `
-		<div>Select a post</div>
-	`,
+	template: 'Select a post',
+	host: { class: 'block p-2' },
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostsIndex {}
