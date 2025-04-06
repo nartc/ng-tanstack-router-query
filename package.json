@@ -20,7 +20,7 @@
 		"@angular/router": "^19.2.0",
 		"@tanstack/angular-query-experimental": "^5.71.10",
 		"rxjs": "~7.8.0",
-		"tanstack-angular-router-experimental": "^0.0.73",
+		"tanstack-angular-router-experimental": "^0.0.74",
 		"tslib": "^2.3.0",
 		"zone.js": "~0.15.0"
 	},

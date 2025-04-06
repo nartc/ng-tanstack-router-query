@@ -10,7 +10,7 @@ export const Route = createRootRoute({
 	selector: 'DefaultNotFound',
 	template: `
 		<p>This is the notFoundComponent configured on root route</p>
-		<a link="/">Start Over</a>
+		<a link="/" class="px-2 py-1 text-white font-mono bg-slate-400 hover:bg-slate-600 rounded-md">Start Over</a>
 	`,
 	host: { class: 'block p-2' },
 	changeDetection: ChangeDetectionStrategy.OnPush,
